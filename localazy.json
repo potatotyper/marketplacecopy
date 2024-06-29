@@ -1,0 +1,16 @@
+{
+ 
+    "writeKey": "a7332816905014250785-3e72fc1d77ff95302dab170725dd647a8c36ed203d53616e3d22137dcaf05fbf",
+    "readKey": "a7332816905014250785-6341a5cf6cd8623ba31d173ccc192bb3acd23e1310abdb53fd2f2c43e0fa74f2",
+    
+    "upload": {  
+      "type": "yaml",
+      "features": ["lang_root"],
+      "files": "translations/en.yaml"         
+    },
+    
+    "download": {
+      "files": "translations/${lang}.yaml"
+    }
+    
+  }
