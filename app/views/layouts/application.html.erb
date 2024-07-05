@@ -16,6 +16,18 @@
     
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
+    <script>
+    $(document).ready(function() {
+      $( ".mr-auto .nav-item" ).bind( "click", function(event) {
+        var clickedItem = $( this );
+        $( ".mr-auto .nav-item" ).each( function() {
+            $( this ).removeClass( "active" );
+        });
+        clickedItem.addClass( "active" );
+      });
+    });
+    </script>
+
     <script type="text/javascript">
     $('document').ready(function() {
       console.log("displaying alert");
