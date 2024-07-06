@@ -15,4 +15,10 @@ Rails.application.routes.draw do
 
   root to: "main#index"
 
+  delete "/logout", to: "sessions#destroy"
+
+  get "/sign-in", to: "sessions#new"
+
+  post "/sign-in", to: "sessions#create"
+
 end
