@@ -1,0 +1,13 @@
+<h1>Reset Password</h1>
+<p>Send email to reset</p>
+
+<%= form_with url: reset_password_path(token: params[:token]), data: { turbo: false } do |form| %>
+<div class="mb-3">
+    <%= form.label :email %>
+    <%= form.text_field :email, class: "form-control", placeholder: "myemail@example.com" %>
+</div>
+
+<div class="mb-3">
+    <%= form.submit "Send Email", class: "btn btn-primary" %>
+</div>
+<% end %>
