@@ -1,9 +1,9 @@
 <div class = "d-flex align-items-center justify-content-center">
     <h1>Main Page</h1>
 
-    <% if @user %>
+    <% if Current.user %>
         <h3>
-        Logged in as: <%= @user.email %>
+        Logged in as: <%= Current.user.email %>
         </h3>
     <% end %>
 
