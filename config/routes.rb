@@ -7,13 +7,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  root to: "main#index"
+  
   get "/about", to: "about#index"
 
   get "/sign-up", to: "registrations#new"
   
   post "/sign-up", to: "registrations#create"
-
-  root to: "main#index"
 
   delete "/logout", to: "sessions#destroy"
 
@@ -28,5 +29,7 @@ Rails.application.routes.draw do
   get "/reset-password/edit", to: "password_reset#edit"
 
   patch "/reset-password/edit", to: "password_reset#update"
+
+  get '/auth/google_oauth2/callback', to: "omniauth_callbacks#google"
 
 end
