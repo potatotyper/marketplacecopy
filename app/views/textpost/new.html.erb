@@ -1,0 +1,24 @@
+<h1>Create log</h1>
+
+<% if @textpost.errors.any? %>
+    <div class="alert alert-danger">
+        <% @textpost.errors.full_messages.each do |messages| %>
+        <div><%= messages %></div>
+        <% end %>
+    </div>
+<% end %>
+
+<%= form_with model: @textpost, url: posts_new_path , data: { turbo: false } do |form| %>
+<div class="mb-3">
+    <%= form.label :post_title %>
+    <%= form.text_field :post_title, class: "form-control", placeholder: "Enter title here" %>
+</div>
+<div class="mb-3">
+    <%= form.label :post_body %>
+    <%= form.text_field :post_body, class: "form-control", placeholder: "Enter content here" %>
+</div>
+
+<div class="mb-3">
+    <%= form.submit "Post", class: "btn btn-primary" %>
+</div>
+<% end %>

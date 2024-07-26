@@ -1,0 +1,7 @@
+<h1>Posts</h1>
+
+<% @posts.each do |post| %>
+    <h3><%= post.post_title %></h3>
+    <p><%= post.post_body %></p>
+    <p><%= User.where(id: post.user_id).first.username %>
+<% end %>

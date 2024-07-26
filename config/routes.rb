@@ -32,4 +32,10 @@ Rails.application.routes.draw do
 
   get '/auth/google_oauth2/callback', to: "omniauth_callbacks#google"
 
+  get '/posts/new', to: 'textpost#new'
+
+  post '/posts/new', to: 'textpost#create'
+
+  get '/posts', to: 'textpost#view'
+
 end
