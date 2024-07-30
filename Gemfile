@@ -69,3 +69,7 @@ end
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+gem 'dotenv', groups: [:development, :test]
+gem 'google-api-client'
+gem 'google-apis-drive_v3'
+gem 'googleauth'

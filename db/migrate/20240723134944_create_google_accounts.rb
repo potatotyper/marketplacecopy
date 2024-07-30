@@ -5,7 +5,7 @@ class CreateGoogleAccounts < ActiveRecord::Migration[7.1]
       t.string :email
       t.string :image
       t.string :token
-      t.string :secret
+      t.string :refresh
 
       t.timestamps
     end

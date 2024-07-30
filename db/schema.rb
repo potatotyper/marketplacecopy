@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_153959) do
     t.string "email"
     t.string "image"
     t.string "token"
-    t.string "secret"
+    t.string "refresh"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_google_accounts_on_user_id"
