@@ -1,6 +1,7 @@
 require 'google/apis/drive_v3'
 require 'google/api_client/client_secrets'
 require 'googleauth'
+require "google/cloud/storage"
 
 module Google
   class AccessToken
@@ -54,8 +55,29 @@ class GoogleDriveService
     puts "FILES BELOW"
     id = 0
     fileslist.files.map do |file|
-      DRIVE.get_file(file.id, download_dest: "app/assets/images/image#{id}.jpg")
+      DRIVE.get_file(file.id, download_dest: "app/assets/images/batchimages/image#{id}.jpg")
       id = id+1
+    end
+  end
+end
+
+class GoogleCloudBucketService
+  def initialize
+    @storage = Google::Cloud::Storage.new(
+      project_id: ENV['STORAGE_PROJECT_ID'],
+      credentials: ENV['STORAGE_CREDS_PATH']
+    )
+    @bucket = @storage.bucket "batchuplaod_vidiotest"
+
+  end
+
+  def upload_to_bucket
+    files = Dir.entries("app/assets/images/batchimages").select do |entry|
+      File.file?(File.join("app/assets/images/batchimages", entry))
+    end
+    for c in 0..(files.size-1) do
+      @bucket.create_file "app/assets/images/batchimages/image#{c}.jpg",
+                          "main_folder/sub_folder/#{c}/image#{c}.jpg"
     end
   end
 end

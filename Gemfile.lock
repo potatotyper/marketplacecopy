@@ -106,6 +106,8 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     declarative (0.0.20)
+    digest-crc (0.6.5)
+      rake (>= 12.0.0, < 14.0.0)
     dotenv (3.1.2)
     drb (2.2.1)
     erubi (1.12.0)
@@ -138,8 +140,25 @@ GEM
       rexml
     google-apis-drive_v3 (0.52.0)
       google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-iamcredentials_v1 (0.21.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-storage_v1 (0.41.0)
+      google-apis-core (>= 0.15.0, < 2.a)
+    google-cloud-core (1.7.0)
+      google-cloud-env (>= 1.0, < 3.a)
+      google-cloud-errors (~> 1.0)
     google-cloud-env (2.1.1)
       faraday (>= 1.0, < 3.a)
+    google-cloud-errors (1.4.0)
+    google-cloud-storage (1.52.0)
+      addressable (~> 2.8)
+      digest-crc (~> 0.4)
+      google-apis-core (~> 0.13)
+      google-apis-iamcredentials_v1 (~> 0.18)
+      google-apis-storage_v1 (~> 0.38)
+      google-cloud-core (~> 1.6)
+      googleauth (~> 1.9)
+      mini_mime (~> 1.0)
     googleauth (1.11.0)
       faraday (>= 1.0, < 3.a)
       google-cloud-env (~> 2.1)
@@ -351,6 +370,7 @@ DEPENDENCIES
   dotenv
   google-api-client
   google-apis-drive_v3
+  google-cloud-storage
   googleauth
   importmap-rails
   jbuilder

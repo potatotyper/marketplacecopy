@@ -73,3 +73,4 @@ gem 'dotenv', groups: [:development, :test]
 gem 'google-api-client'
 gem 'google-apis-drive_v3'
 gem 'googleauth'
+gem 'google-cloud-storage'

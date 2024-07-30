@@ -3,6 +3,7 @@ class AboutController < ApplicationController
     def index
         puts "GSD LIST"
         puts GoogleDriveService.new.list
+        GoogleCloudBucketService.new.upload_to_bucket
     end
     
 end
