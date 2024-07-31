@@ -1,2 +1,7 @@
 <h1>About Us</h1>
 <h2><%= I18n.t('page1.lorem_ipsum_text', sample_info_text: "Lorem Ipsum Parameter") %></h2>
+<% ImageType.all.each do |imag| %>
+    <h3><%= imag.image_name %></h3>
+    <h3><%= imag.image_id %></h3>
+    <h3><%= imag.image_path %></h3>
+<% end %>

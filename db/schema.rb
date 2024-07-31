@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_24_153959) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_022340) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -27,6 +27,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_153959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_google_accounts_on_user_id"
+  end
+
+  create_table "image_types", force: :cascade do |t|
+    t.string "image_name"
+    t.string "image_path"
+    t.string "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movie_associations", force: :cascade do |t|
+    t.string "image_id"
+    t.integer "film_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "textposts", force: :cascade do |t|

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: "main#index"
   
   get "/about", to: "about#index"
+  get "/test", to: "about#test"
 
   get "/sign-up", to: "registrations#new"
   

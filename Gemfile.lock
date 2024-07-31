@@ -142,6 +142,8 @@ GEM
       google-apis-core (>= 0.15.0, < 2.a)
     google-apis-iamcredentials_v1 (0.21.0)
       google-apis-core (>= 0.15.0, < 2.a)
+    google-apis-sheets_v4 (0.33.0)
+      google-apis-core (>= 0.15.0, < 2.a)
     google-apis-storage_v1 (0.41.0)
       google-apis-core (>= 0.15.0, < 2.a)
     google-cloud-core (1.7.0)
@@ -370,6 +372,7 @@ DEPENDENCIES
   dotenv
   google-api-client
   google-apis-drive_v3
+  google-apis-sheets_v4
   google-cloud-storage
   googleauth
   importmap-rails
