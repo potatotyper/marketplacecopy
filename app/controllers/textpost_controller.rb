@@ -9,7 +9,7 @@ class TextpostController < ApplicationController
     else
       @textpost = Textpost.create(post_params);
       if Current.user.textposts << @textpost
-        return redirect_to root_path, notice: "Post created successfully."
+        return redirect_to posts_path, notice: "Post created successfully."
       else
         render :new
       end

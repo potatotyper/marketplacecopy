@@ -1,15 +1,8 @@
 <div class = "d-flex align-items-center justify-content-center">
     <h1>Main Page</h1>
 
-    <% if Current.user %>
-        <h3>
-        Logged in as: <%= Current.user.email %>
-        </h3>
-        <% if Current.user.google_account %>
-            <h3>
-            Logged into google as: <%= Current.user.google_account.email %>
-            </h3>
-        <% end %>
+    <% if cookies[:jwt] != nil %>
+        <p><%= cookies[:jwt]%></p>
     <% end %>
     
 

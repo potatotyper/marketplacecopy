@@ -8,8 +8,6 @@ class OmniauthCallbacksController < ApplicationController
     else 
       if Current.user.google_account != nil || GoogleAccount.exists?(email: auth.info.email)
         Current.user.google_account.token = auth.credentials.token
-        puts "LIST FILES BELOW"
-        GoogleDriveService.new.list
         return redirect_to root_path, notice: "Google account previously linked"
       else
         Current.user.google_account = GoogleAccount.create(
@@ -18,7 +16,6 @@ class OmniauthCallbacksController < ApplicationController
           token: auth.credentials.token,
           refresh: auth.credentials.refresh_token,
         )
-        GoogleDriveService.new.list
       end
     end
     redirect_to root_path, notice: "Successfully logged into google"

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :users
+      resources :textposts
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,17 +17,22 @@ Rails.application.routes.draw do
   root to: "main#index"
   
   get "/about", to: "about#index"
-  get "/test", to: "about#test"
 
   get "/sign-up", to: "registrations#new"
   
   post "/sign-up", to: "registrations#create"
 
-  delete "/logout", to: "sessions#destroy"
+  # delete "/logout", to: "sessions#destroy"
 
-  get "/sign-in", to: "sessions#new"
+  # get "/sign-in", to: "sessions#new"
 
-  post "/sign-in", to: "sessions#create"
+  # post "/sign-in", to: "sessions#create"
+
+  get "sign-in", to: "auth#new"
+
+  post "/sign-in", to: "auth#login"
+
+  post "/logout", to: "auth#logout"
 
   get "/reset-password", to: "password_reset#new"
 
@@ -38,5 +49,6 @@ Rails.application.routes.draw do
   post '/posts/new', to: 'textpost#create'
 
   get '/posts', to: 'textpost#view'
+  
 
 end

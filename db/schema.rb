@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_022340) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_06_114944) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -19,29 +19,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_022340) do
   end
 
   create_table "google_accounts", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.string "email"
     t.string "image"
     t.string "token"
     t.string "refresh"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_google_accounts_on_user_id"
   end
 
-  create_table "image_types", force: :cascade do |t|
-    t.string "image_name"
-    t.string "image_path"
-    t.string "image_id"
+  create_table "itemcomments", force: :cascade do |t|
+    t.string "post_body"
+    t.integer "user_id", null: false
+    t.integer "itempost_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["itempost_id"], name: "index_itemcomments_on_itempost_id"
+    t.index ["user_id"], name: "index_itemcomments_on_user_id"
   end
 
-  create_table "movie_associations", force: :cascade do |t|
-    t.string "image_id"
-    t.integer "film_id"
+  create_table "itemposts", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "image"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_itemposts_on_user_id"
   end
 
   create_table "textposts", force: :cascade do |t|
@@ -63,5 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_022340) do
   end
 
   add_foreign_key "google_accounts", "users"
+  add_foreign_key "itemcomments", "itemposts"
+  add_foreign_key "itemcomments", "users"
+  add_foreign_key "itemposts", "users"
   add_foreign_key "textposts", "users"
 end
