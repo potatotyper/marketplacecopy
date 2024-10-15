@@ -1,7 +1,11 @@
 <h1>Posts</h1>
 
-<% @posts.each do |post| %>
-    <h3><%= post.post_title %></h3>
-    <p><%= post.post_body %></p>
-    <p><%= User.where(id: post.user_id).first.username %>
+<% if @posts != nil %>
+    <% @posts.each do |post| %>
+        <h3><%= post.post_title %></h3>
+        <p><%= post.post_body %></p>
+        <%# <p><%= User.where(id: post.user_id).first.username %> </p> 
+        <p><%= post.username %> </p>
+        <%= button_to "Delete", del_post_path(post), method: :delete, onclick: "setTimeout(function(){ location.reload(); }, 500);"%>
+    <% end %>
 <% end %>

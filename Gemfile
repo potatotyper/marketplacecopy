@@ -78,3 +78,6 @@ gem 'google-apis-sheets_v4'
 gem 'jwt'
 gem 'rack-cors'
 gem 'active_model_serializers'
+
+gem 'redis'
+gem 'redis-rails'

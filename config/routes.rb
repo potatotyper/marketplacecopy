@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   post "/sign-in", to: "auth#login"
 
-  post "/logout", to: "auth#logout"
+  delete "/logout", to: "auth#logout"
 
   get "/reset-password", to: "password_reset#new"
 
@@ -49,6 +49,10 @@ Rails.application.routes.draw do
   post '/posts/new', to: 'textpost#create'
 
   get '/posts', to: 'textpost#view'
+
+  get '/posts/:id', to: 'textpost#get', as: 'get_post'
+  
+  delete '/posts/:id', to:'textpost#destroy', as: 'del_post'
   
 
 end

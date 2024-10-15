@@ -23,14 +23,24 @@ Rails.application.configure do
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.to_i}"
+    # config.cache_store = :memory_store
+    # config.public_file_server.headers = {
+    #   "Cache-Control" => "public, max-age=#{2.days.to_i}"
+    # }
+    config.cache_store = :redis_cache_store, {
+      url: ENV['REDIS_URL'] || 'redis://localhost:6379/0',
+      namespace: 'myapp_cache',
+      expires_in: 12.hours
     }
   else
-    config.action_controller.perform_caching = false
+    # config.action_controller.perform_caching = false
 
-    config.cache_store = :null_store
+    # config.cache_store = :null_store
+    config.cache_store = :redis_cache_store, {
+      url: ENV['REDIS_URL'] || 'redis://localhost:6379/0',
+      namespace: 'myapp_cache',
+      expires_in: 12.hours
+    }
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
@@ -75,4 +85,10 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.action_mailer.default_url_options = { host: "localhost", port: 3000}
+
+  config.cache_store = :redis_cache_store, {
+  url: ENV['REDIS_URL'] || 'redis://localhost:6379/0',
+  namespace: 'myapp_cache',
+  expires_in: 12.hours
+}
 end

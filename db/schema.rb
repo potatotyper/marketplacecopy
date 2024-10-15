@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_114944) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_10_072630) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_114944) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["user_id"], name: "index_itemposts_on_user_id"
   end
 
@@ -55,6 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_114944) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["user_id"], name: "index_textposts_on_user_id"
   end
 

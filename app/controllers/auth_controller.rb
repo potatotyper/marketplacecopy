@@ -1,5 +1,5 @@
 class AuthController < ApplicationController
-  skip_before_action :authorized, only: [:login, :new]
+  skip_before_action :authorized, only: [:login, :new, :logout]
   
   def new
     @user = User.new
@@ -29,6 +29,7 @@ class AuthController < ApplicationController
 
   def logout
     cookies.delete(:jwt, httponly: true)
+    Current.user = nil
     redirect_to root_path, notice: "Logged out"
   end
 
