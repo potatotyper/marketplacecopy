@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_10_072630) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_073726) do
   create_table "admins", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -32,31 +32,38 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_072630) do
   create_table "itemcomments", force: :cascade do |t|
     t.string "post_body"
     t.integer "user_id", null: false
-    t.integer "itempost_id", null: false
+    t.integer "textpost_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["itempost_id"], name: "index_itemcomments_on_itempost_id"
+    t.index ["textpost_id"], name: "index_itemcomments_on_textpost_id"
     t.index ["user_id"], name: "index_itemcomments_on_user_id"
   end
 
-  create_table "itemposts", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "image"
+  create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
-    t.index ["user_id"], name: "index_itemposts_on_user_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_private", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "textposts", force: :cascade do |t|
     t.string "post_title"
     t.string "post_body"
+    t.string "image"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
+    t.string "price"
     t.index ["user_id"], name: "index_textposts_on_user_id"
   end
 
@@ -70,8 +77,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_072630) do
   end
 
   add_foreign_key "google_accounts", "users"
-  add_foreign_key "itemcomments", "itemposts"
+  add_foreign_key "itemcomments", "textposts"
   add_foreign_key "itemcomments", "users"
-  add_foreign_key "itemposts", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "textposts", "users"
 end

@@ -64,7 +64,14 @@ class ApplicationController < ActionController::Base
           user_id = decoded_token[0]['user_id']
           @user = User.find_by(id: user_id)
           Current.user = @user
+          puts "Current user id is", Current.user.id
+          return true
       end
+    
+    def get_curr_user
+      authorized()
+      @current_user = Current.user
+    end
   end
   
   def authorized

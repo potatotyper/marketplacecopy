@@ -1,0 +1,14 @@
+<% if @item != nil %>
+    <div class="post" id=<%= @item.post_title %> style>
+        <h3><%= @item.post_title %></h3>
+        <p><%= @item.post_body %></p>
+        <%# <p><%= User.where(id: @item.user_id).first.username %> </p> 
+        <p><%= @item.user.username %> </p>
+        <div style="display: flex; gap: 10px;">
+            <% if Current.user.id == @item.user_id %>
+                <%= button_to "Edit", index_path, method: :get %>
+            <% end %>
+            <%= button_to "Delete", del_post_path(@item), method: :delete, onclick: "setTimeout(function(){ location.reload(); }, 500);"%>
+        </div>
+    </div>
+<% end %>

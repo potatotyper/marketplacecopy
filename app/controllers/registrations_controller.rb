@@ -16,7 +16,7 @@ class RegistrationsController < ApplicationController
             httponly: true, # Ensure the cookie is HttpOnly
             secure: Rails.env.production? # Set secure flag in production
           }
-            redirect_to root_path, notice: @token
+            redirect_to root_path, notice: "User Created! Please log in."
         else
             render :new
         end
@@ -26,7 +26,7 @@ class RegistrationsController < ApplicationController
         # }, status: :created 
         # if @user.save
             # session[:user_id] = @user.id
-        #     redirect_to root_path, notice: "Successfully created account!"
+        #     redirect_to index_path, notice: "Successfully created account!"
         # else
         #     render :new
         # end

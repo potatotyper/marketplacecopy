@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :users
-      resources :textposts
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :users
+  #     resources :textposts
+  #   end
+  # end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  root to: "main#index"
+  root to: "main#home"
+
+  get "/index", to: "main#index"
   
   get "/about", to: "about#index"
 
@@ -48,11 +50,18 @@ Rails.application.routes.draw do
 
   post '/posts/new', to: 'textpost#create'
 
-  get '/posts', to: 'textpost#view'
+  get '/posts/:page', to: 'textpost#view', as: 'view_post'
 
-  get '/posts/:id', to: 'textpost#get', as: 'get_post'
+  get '/post/:id', to: 'textpost#item', as: 'get_post'
   
-  delete '/posts/:id', to:'textpost#destroy', as: 'del_post'
-  
+  delete '/post/:id', to:'textpost#destroy', as: 'del_post'
+
+  get '/posts', to:'textpost#getall', as: 'post_ga'
+
+  resources :rooms do
+    resources :messages
+  end
+
+  resources :users
 
 end

@@ -7,10 +7,16 @@ class AuthController < ApplicationController
 
   def login 
       puts "PARAMS HERE", params.inspect
+      puts login_params
       @user = User.find_by(username: login_params[:username])
-      if @user.authenticate(login_params[:password])
+      if @user == nil 
+        flash[:alert] = "Invalid Log In"
+        Current.user = nil
+        render :new
+      elsif @user.authenticate(login_params[:password])
           @token = encode_token(user_id: @user.id)
-          Current.user = @User
+          Current.user = @user
+          puts "CURRENT USER SET"
           cookies[:jwt] = {
             value: @token,
             expires: 1.hour.from_now, # Set expiration time
@@ -18,7 +24,8 @@ class AuthController < ApplicationController
             secure: Rails.env.production? # Set secure flag in production
           }
           puts "What is this?", cookies[:jwt], "A COOKIEE"
-          redirect_to root_path, notice: @token
+          puts Current.user.id
+          redirect_to index_path, notice: @token
       else
         flash[:alert] = "Invalid Log In"
         Current.user = nil

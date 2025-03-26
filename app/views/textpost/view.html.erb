@@ -1,11 +1,52 @@
+<style>
+    .post {
+        border: 2px solid black; /* 2px width, solid style, black color */
+        padding: 10px;           /* Optional: Add some padding */
+    }
+
+    .nav-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .nav-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
 <h1>Posts</h1>
 
 <% if @posts != nil %>
     <% @posts.each do |post| %>
+    <div class="post" id=<%= post.post_title %> style>
         <h3><%= post.post_title %></h3>
         <p><%= post.post_body %></p>
         <%# <p><%= User.where(id: post.user_id).first.username %> </p> 
-        <p><%= post.username %> </p>
-        <%= button_to "Delete", del_post_path(post), method: :delete, onclick: "setTimeout(function(){ location.reload(); }, 500);"%>
+        <p><%= post.user.username %> </p>
+        <div style="display: flex; gap: 10px;">
+            <% if Current.user.id == post.user_id %>
+                <%= button_to "Edit", index_path, method: :get %>
+            <% end %>
+            <%= button_to "View", "/post/#{post.id}", method: :get %>
+            <%= button_to "Delete", del_post_path(post), method: :delete, onclick: "setTimeout(function(){ location.reload(); }, 500);"%>
+        </div>
+    </div>
     <% end %>
+    <div style="display: flex; gap: 10px;">
+    <%= button_to "Newest", "/posts/0", method: :get %>
+
+    <%= button_to "Next", "/posts/#{@page + 1}", method: :get %>
+
+    <% if @page > 0 %>
+    <%= button_to "Previous", "/posts/#{@page - 1}", method: :get %>
+    <% end %>
+    </div>
 <% end %>

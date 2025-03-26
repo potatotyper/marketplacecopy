@@ -4,6 +4,10 @@
     <% if cookies[:jwt] != nil %>
         <p><%= cookies[:jwt]%></p>
     <% end %>
+
+    <% if Current.user %>
+        <p><%= Current.user.id %></p>
+    <% end %>
     
 
     <%= button_to "Logout", logout_path, method: :delete %>

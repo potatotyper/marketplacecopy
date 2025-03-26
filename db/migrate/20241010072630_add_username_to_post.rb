@@ -1,6 +1,5 @@
 class AddUsernameToPost < ActiveRecord::Migration[7.1]
   def change
-    add_column :itemposts, :username, :string
-    add_column :textposts, :username, :string
+    add_column :textposts, :price, :string
   end
 end

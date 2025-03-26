@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<head>
+  <%= javascript_include_tag "turbo", type: "module" %>
+</head>
+<style>
+  <%= ".msg-#{Current.user&.id}" %> {
+  background-color: #007bff !important;
+  padding: 10px;
+  }
+  <%= ".cont-#{Current.user&.id}" %> {
+  display: flex;
+  justify-content: flex-end
+  }
+</style>
 <html>
   <head>
     <title>FirstRubyMvc</title>

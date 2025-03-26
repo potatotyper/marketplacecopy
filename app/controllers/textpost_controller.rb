@@ -1,16 +1,25 @@
 class TextpostController < ApplicationController
+  # skip_before_action :authorized, only: [:getall]
+
+  PPP = 3;
+  # def getall
+  #   @posts = Textpost.all
+
+  #   render json: @posts
+  # end
+  
   def new
     @textpost = Textpost.new
   end
 
-  def create 
+  def create
     if Current.user.google_account == nil 
-      return redirect_to root_path, notice: "Please create a site account and link it to a google account first."
+      return redirect_to index_path, notice: "Please create a site account and link it to a google account first."
     else
       @textpost = Textpost.create(post_params);
-      @textpost.username = Current.user.username;
+      @textpost.user_id = Current.user.id;
       if Current.user.textposts << @textpost
-        return redirect_to posts_path, notice: "Post created successfully."
+        return redirect_to action: 'view', page: 0
       else
         render :new
       end
@@ -18,15 +27,19 @@ class TextpostController < ApplicationController
   end
 
   def view
-    # @posts = Textpost.all
-    @posts = Rails.cache.fetch("textposts", expires_in: 12.hours) do
-      Textpost.all
+    puts Current.user.id
+    @page = params.fetch(:page, 0).to_i;
+    if @page == 0 
+      @posts = Rails.cache.fetch("textposts_page_#{@page}_limit_#{PPP}", expires_in: 12.hours) do
+        Textpost.order(created_at: :desc).offset(@page * PPP).limit(PPP);
+      end
+    else
+      @posts = Textpost.order(created_at: :desc).offset(@page * PPP).limit(PPP);
     end
-    puts Rails.cache.read("textposts") , "THIS IS THE POST CACHE"
   end
 
-  def get
-    
+  def item
+    @item = Textpost.find_by(id: params[:id])
   end
 
   def destroy

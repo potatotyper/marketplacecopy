@@ -4,7 +4,7 @@ class CreateItemcomments < ActiveRecord::Migration[7.1]
       t.string :post_body
       
       t.belongs_to :user, null: false, foreign_key: true
-      t.belongs_to :itempost, null: false, foreign_key: true
+      t.belongs_to :textpost, null: false, foreign_key: true
 
       t.timestamps
     end
